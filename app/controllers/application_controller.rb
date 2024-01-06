@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
+    # Ensure accurate retrieval of the user's IP address, considering proxies or load balancers
     ip = if request.headers["X-Forwarded-For"].present?
           request.headers["X-Forwarded-For"].split(",").first.strip
         else
