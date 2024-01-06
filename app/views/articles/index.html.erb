@@ -1,0 +1,7 @@
+<%= form_with url: articles_path, method: :get, data: { turbo_frame: "search_results" } do |form| %>
+  <%= form.text_field :search, placeholder: "Search articles...", data: { turbo_action: "keyup->search#perform" } %>
+<% end %>
+
+<turbo-frame id="search_results">
+  <%= render partial: "articles_list", locals: { articles: @articles } %>
+</turbo-frame>
