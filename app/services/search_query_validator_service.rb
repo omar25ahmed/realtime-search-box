@@ -19,14 +19,20 @@ class SearchQueryValidatorService
   private
 
   def fetch_last_search
-    @user.searches.order(updated_at: :desc).first
+    @user.searches.order(updated_at: :desc).first # Composite index added for user_id and updated_at to improve the performance
   end
 
   def normalize_query(query)
     query&.delete(' ')&.downcase
   end
 
+  # Any checks will be written here to enhance our algorithm in response to new requirements or improvements
   def valid_for_update?(last_search, current_query)
-    last_search.present? && (current_query.include?(last_search) || last_search.include?(current_query))
+    return false unless last_search.present?
+
+    includes_current_query = current_query.include?(last_search)
+    includes_last_search = last_search.include?(current_query)
+
+    includes_current_query || includes_last_search
   end
 end
