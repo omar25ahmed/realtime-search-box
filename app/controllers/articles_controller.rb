@@ -1,14 +1,16 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = if params[:search]
-                  Article.where("title LIKE ?", "%#{params[:search]}%")
-                else
-                  Article.all
-                end
+    @articles = articles_based_on_search
+  end
 
-    respond_to do |format|
-      format.html
-      format.turbo_stream
+  private
+
+  def articles_based_on_search
+    if params[:search].present?
+      SearchQueryValidatorService.new(current_user, params[:search]).generate
+      Article.by_title(params[:search])
+    else
+      Article.all
     end
   end
 end

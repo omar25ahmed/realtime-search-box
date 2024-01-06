@@ -23,9 +23,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_06_084942) do
 
   create_table "searches", force: :cascade do |t|
     t.bigint "user_id"
-    t.text "query"
+    t.string "query"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["query"], name: "index_searches_on_query"
     t.index ["user_id", "updated_at"], name: "index_searches_on_user_id_and_updated_at"
     t.index ["user_id"], name: "index_searches_on_user_id"
   end
