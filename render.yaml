@@ -1,7 +1,7 @@
 databases:
   - name: realtime-search-box
-    databaseName: realtime-search-box
-    user: Ragheb
+    databaseName: realtime_search_box_production
+    user: realtime_search_box
     plan: free
 
 services:
