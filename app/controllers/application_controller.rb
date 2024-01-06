@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-    current_user ||= User.find_or_create_by(ip_address: request.remote_ip)
+    ip = if request.headers["X-Forwarded-For"].present?
+          request.headers["X-Forwarded-For"].split(",").first.strip
+        else
+          request.remote_ip
+        end
+    current_user ||= User.find_or_create_by(ip_address: ip)
   end
 end
