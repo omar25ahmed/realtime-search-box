@@ -1,7 +1,7 @@
 <div>
   <h1 class="font-bold text-4xl">Trends:</h1>
   <p>What people are searching for the most</p>
-  <div class="max-w-md mx-auto mt-10 flex justify-center flex-col w-[100vw]">
+  <div class="max-w-md mx-auto mt-10 flex justify-center flex-col">
     <%= turbo_stream_from(:top_searches) %>
     <turbo-frame id="top_searches">
       <%= render partial: "search", locals: { searches: @top_searches } %>
