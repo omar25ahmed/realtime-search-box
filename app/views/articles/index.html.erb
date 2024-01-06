@@ -1,0 +1,10 @@
+<h1 class="font-bold text-4xl">Articles:</h1>
+<div class="container mx-auto p-6">
+  <%= form_with url: articles_path, method: :get, data: { controller: "search", turbo_frame: "search_results", search_target: "form" }, class: "flex space-x-4" do |form| %>
+    <%= form.text_field :search, placeholder: "Search articles...", data: { action: "keyup->search#perform" }, class: "form-input block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" %>
+  <% end %>
+
+  <turbo-frame id="search_results">
+    <%= render partial: "articles_list", locals: { articles: @articles } %>
+  </turbo-frame>
+</div>
