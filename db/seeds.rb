@@ -1,3 +1,7 @@
+Article.destroy_all
+User.destroy_all
+Searches.destroy_all
+
 150.times do
   Article.create(
     title: Faker::Book.title,
