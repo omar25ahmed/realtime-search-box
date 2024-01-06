@@ -9,7 +9,7 @@ class Search < ApplicationRecord
   private
 
   def broadcast_top_searches
-    Turbo::StreamsChannel.broadcast_replace_to 'top_searches',
+    Turbo::StreamsChannel.broadcast_update_to 'top_searches',
       target: 'top_searches',
       partial: 'searches/search',
       locals: { searches: self.class.top_searches }

@@ -1,12 +1,10 @@
-<turbo-frame id="top_searches">
-  <% searches.each do |search| %>
-    <div class="flex justify-between items-center bg-gray-100 shadow-md rounded-lg p-4 mb-4">
-      <span class="text-gray-700 text-lg font-medium"><%= search.query %></span>
-      <% if search.respond_to?(:count) %>
-        <span class="bg-blue-100 text-blue-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded"><%= search.count %> times</span>
-      <% else %>
-        <span class="bg-blue-100 text-blue-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded"><%= search.updated_at %> &#x23F2;</span>
-      <% end %>
-    </div>
-  <% end %>
-</turbo-frame>
+<% searches.each do |search| %>
+  <div class="flex justify-between items-center bg-gray-100 shadow-md rounded-lg p-4 mb-4">
+    <span class="text-gray-700 text-lg font-medium"><%= search.query %></span>
+    <% if search.respond_to?(:count) %>
+      <span class="bg-blue-100 text-blue-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded"><%= search.count %> times</span>
+    <% else %>
+      <span class="bg-blue-100 text-blue-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded"><%= search.updated_at %> &#x23F2;</span>
+    <% end %>
+  </div>
+<% end %>
