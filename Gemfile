@@ -48,6 +48,9 @@ gem "bootsnap", require: false
 # Generate dummy data
 gem 'faker', '~> 3.2', '>= 3.2.2'
 
+# Background jobs
+gem 'sidekiq', '~> 7.1', '>= 7.1.2'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

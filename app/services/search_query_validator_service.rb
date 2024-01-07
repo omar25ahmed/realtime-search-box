@@ -4,7 +4,7 @@ class SearchQueryValidatorService
     @query = query
   end
 
-  def generate
+  def execute
     last_search = fetch_last_search
     normalized_last_search = normalize_query(last_search&.query)
     normalized_current_query = normalize_query(@query)

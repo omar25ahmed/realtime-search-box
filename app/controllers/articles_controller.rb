@@ -1,16 +1,10 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
   def index
-    @articles = articles_based_on_search
-  end
-
-  private
-
-  def articles_based_on_search
-    if params[:search].present?
-      SearchQueryValidatorService.new(current_user, params[:search]).generate # service to manage validation and storage of user search queries, preventing redundancy and ensuring data integrity.
-      Article.by_title(params[:search])
-    else
-      Article.all
-    end
+    @articles = Article.by_title(params[:search])
+    # Initiate a background job using ProcessSearchJob to handle the search process asynchronously,
+    # optimizing scalability by efficiently managing thousands of requests without impacting application performance.
+    ProcessSearchJob.perform_async(current_user.id, params[:search]) if params[:search]
   end
 end
